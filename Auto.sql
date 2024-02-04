@@ -17,3 +17,5 @@ VALUES (2, 'Honda', 'Civic', 2021, 'Rojo', 23000);
 
 INSERT INTO automovil (id_automovil, marca, modelo, anio_fabricacion, color, precio)
 VALUES (3, 'Ford', 'Focus', 2023, 'Negro', 22000);
+
+SELECT * FROM automovil;
