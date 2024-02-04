@@ -1,0 +1,8 @@
+#name	number	type	flag	comment
+OUTPUT	5	string	-	-
+AUTOID	10	long	-	- ID automovil
+MARCA	20	string	-	- marca del automovil
+MODELO	30	string	-	- modelo del automovil
+ANIO	40	string	-	- anio del automovil
+PRECIO	50	double	-	- precio del automovil
+COLOR	60	string	-	- color del automovil
