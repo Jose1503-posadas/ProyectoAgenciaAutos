@@ -1,0 +1,40 @@
+userlog("Servicio SELECT_TODOS_AgenciaAUtos Invocado");
+    
+    if (Fget32(fbfr, AUTOID, 0, (char*)&a_autoID, 0) < 0) {
+        userlog("Error Fget32(AUTOID): %s", Fstrerror32(Ferror32));
+        tpreturn(TPFAIL, 0, rqst->data, 0L, 0);
+    }
+    userlog(" AutoID: [%d]", a_autoID);
+
+    if (Fget32(fbfr, MARCA, 0, (char*)a_marca, 0) < 0) {
+        userlog("Error Fget32(MARCA): %s", Fstrerror32(Ferror32));
+        tpreturn(TPFAIL, 0, rqst->data, 0L, 0);
+    }
+    userlog(" MarcaID : [%s]", a_marca);
+
+    if (Fget32(fbfr, MODELO, 0, a_modelo, 0) < 0) {
+        userlog("Error Fget32(MODELO): %s", Fstrerror32(Ferror32));
+        tpreturn(TPFAIL, 0, rqst->data, 0L, 0);
+    }
+    userlog(" Modelo: [%s]", a_modelo);
+
+    if (Fget32(fbfr, ANIO, 0, a_anio, 0) < 0) {
+        userlog("Error Fget32(ANIO): %s", Fstrerror32(Ferror32));
+        tpreturn(TPFAIL, 0, rqst->data, 0L, 0);
+    }
+    userlog(" ANIO: [%s]", a_anio);
+
+    if (Fget32(fbfr, COLOR, 0, a_color, 0) < 0) {
+        userlog("Error Fget32(COLOR): %s", Fstrerror32(Ferror32));
+        tpreturn(TPFAIL, 0, rqst->data, 0L, 0);
+    }
+    userlog(" COLOR: [%s]", a_color);
+
+
+    if (Fget32(fbfr, PRECIO, 0, (char*)&a_precio, 0) < 0) {
+        userlog("Error Fget32(PRECIO): %s", Fstrerror32(Ferror32));
+        tpreturn(TPFAIL, 0, rqst->data, 0L, 0);
+    }
+    userlog(" Precio: [%lf]", a_precio);
+
+    Finit32(fbfr, Fsizeof32(fbfr));
