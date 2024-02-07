@@ -1,0 +1,58 @@
+# Variables
+PROC = $(ORACLE_HOME)/bin/proc
+PROC_CFLAGS = code=ANSI_C
+PROCINCLUDES = include=include include=/usr/include include=/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include include=/usr/include/linux sys_include=/usr/include include=../inc
+PROCFLAGS = $(PROC_CFLAGS) $(PROCINCLUDES)
+BIN = ../bin
+OBJ = ../obj
+SRC = ../src
+INC = ../inc
+FML = ../fml
+CC = gcc
+
+# Generación de la Aplicación
+all: campos_fml precompila ProyectoAgenciaAutos clienteProyecto
+
+# Compilación de Campos FML
+campos_fml: $(FML)/bib_proyecto.fml
+	mkfldhdr32 $(FML)/bib_proyecto.fml
+	mv bib_proyecto.fml.h $(INC)
+
+# Precompilación
+precompila:
+	@echo "Precompilando ..."
+	$(PROC) $(PROCFLAGS) include=/usr/include/c++/4.8.2/x86_64-redhat-linux include=$(ORACLE_HOME)/precomp/public include=$(ORACLE_HOME)/rdbms/public include=../inc include=$(TUXDIR)/include $(SRC)/ProyectoAgenciaAutos.pc
+
+# Generación de Servidores
+ProyectoAgenciaAutos: $(OBJ)/ProyectoAgenciaAutos.o
+	@echo Compilando el servidor ProyectoAgenciaAutos
+	buildserver -v -f $(OBJ)/ProyectoAgenciaAutos.o \
+		-f "-I$(INC)" \
+		-l "-L$(ORACLE_HOME)/lib" \
+		-o "$(BIN)/ProyectoAgenciaAutos -lclntsh" \
+		-s SELECT_TODOS_AgenciaAutos,SELECT_BUSCAR_AgenciaAutos,INSERT_AgenciaAutos,UPDATE_AgenciaAutos,DELETE_AgenciaAutos
+
+# Generación de Clientes
+clienteProyecto: $(OBJ)/clienteProyecto.o
+	@echo Compilando el cliente cliente Proyecto
+	buildclient -f $(OBJ)/clienteProyecto.o -o $(BIN)/clienteProyecto
+
+# Generación de Ficheros Objeto
+$(OBJ)/ProyectoAgenciaAutos.o: $(SRC)/ProyectoAgenciaAutos.c
+	@echo "Generando objetos ..."
+	$(CC) -c -I/usr/include/c++/4.8.2/x86_64-redhat-linux \
+		-I$(ORACLE_HOME)/precomp/public -I$(ORACLE_HOME)/rdbms/public -I../inc \
+		-I$(TUXDIR)/include -L$(ORACLE_HOME)/lib -L$(TUXDIR)/lib $(SRC)/ProyectoAgenciaAutos.c -o \
+		$(OBJ)/ProyectoAgenciaAutos.o -lclntsh -lfml32 -ltux
+
+$(OBJ)/clienteProyecto.o: $(SRC)/clienteProyecto.c
+	$(CC) -c -I../inc -I$(TUXDIR)/include $(SRC)/clienteProyecto.c -o \
+		$(OBJ)/clienteProyecto.o
+
+
+# Limpieza
+cleanAll:
+	rm $(OBJ)/*.o
+
+cleanElem:
+	rm $(OBJ)/ProyectoAgenciaAutos.o $(OBJ)/clienteProyecto.o
