@@ -100,11 +100,26 @@ void on_button_insert_clicked(GtkButton *button, gpointer user_data) {
 GtkWidget *create_insert_page(GtkWidget *notebook, InsertWidgets *insert_widgets) {
     GtkWidget *page_insert = create_notebook_page(notebook, "Insertar");
     GtkWidget *button_insert = create_button("Insertar");
+
+    // Etiquetas explicativas
+    GtkWidget *label_autoID = gtk_label_new("ID del Auto:");
+    GtkWidget *label_marca = gtk_label_new("Marca:");
+    GtkWidget *label_modelo = gtk_label_new("Modelo:");
+    GtkWidget *label_anio = gtk_label_new("Año:");
+    GtkWidget *label_color = gtk_label_new("Color:");
+    GtkWidget *label_precio = gtk_label_new("Precio:");
+
+    gtk_box_pack_start(GTK_BOX(page_insert), label_autoID, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(page_insert), insert_widgets->entry_autoID, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(page_insert), label_marca, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(page_insert), insert_widgets->entry_marca, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(page_insert), label_modelo, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(page_insert), insert_widgets->entry_modelo, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(page_insert), label_anio, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(page_insert), insert_widgets->entry_anio, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(page_insert), label_color, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(page_insert), insert_widgets->entry_color, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(page_insert), label_precio, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(page_insert), insert_widgets->entry_precio, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(page_insert), button_insert, FALSE, FALSE, 0);
 
@@ -113,6 +128,7 @@ GtkWidget *create_insert_page(GtkWidget *notebook, InsertWidgets *insert_widgets
     
     return page_insert;
 }
+
 
 int main(int argc, char **argv) {
     // Inicializar GTK
@@ -489,3 +505,4 @@ GtkWidget *entry_color, GtkWidget *entry_precio) {
     tpterm();
     return 0;
 }
+
