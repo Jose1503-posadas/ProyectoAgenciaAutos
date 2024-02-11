@@ -42,8 +42,8 @@ void on_notebook_switch_page(GtkNotebook *notebook, GtkWidget *page, guint page_
 }
 
 // Prototipos de funciones de callback para los botones de las pestañas
-void on_select_todos_clicked(GtkButton *button, GtkWidget *text_view);
-void on_buscar_clicked(GtkButton *button, BuscarWidgets *widgets);
+void clientSelect_todos_AgenciaAutos(GtkButton *button, GtkWidget *text_view);
+void clientSelect_buscar_AgenciaAutos(GtkButton *button, BuscarWidgets *widgets);
 int clientDelete_AgenciaAutos(GtkButton *button, GtkWidget *entry;);
 
 // Función para crear la ventana principal
