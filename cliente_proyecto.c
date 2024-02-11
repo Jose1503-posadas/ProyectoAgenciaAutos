@@ -238,7 +238,7 @@ int main(int argc, char **argv) {
     BuscarWidgets *buscar_widgets = g_new(BuscarWidgets, 1);
     buscar_widgets->entry = entry_buscar;
     buscar_widgets->text_view = text_view_buscar;
-    g_signal_connect(button_buscar, "clicked", G_CALLBACK(clientSelect_buscar_AgenciaAutos, buscar_widgets);
+    g_signal_connect(button_buscar, "clicked", G_CALLBACK(clientSelect_buscar_AgenciaAutos), buscar_widgets);
 
    // Conectar señal de click del botón de eliminar
     GtkWidget *entry;
