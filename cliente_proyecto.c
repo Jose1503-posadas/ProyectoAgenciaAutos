@@ -233,12 +233,12 @@ int main(int argc, char **argv) {
     gtk_box_pack_start(GTK_BOX(page_eliminar), button_eliminar, FALSE, FALSE, 0);
 
     // Conectar señales de los botones
-    g_signal_connect(button_select_todos, "clicked", G_CALLBACK(on_select_todos_clicked), text_view_select_todos);
+    g_signal_connect(button_select_todos, "clicked", G_CALLBACK(clientSelect_todos_AgenciaAutos), text_view_select_todos);
     // Conectar señal de click del botón de búsqueda
     BuscarWidgets *buscar_widgets = g_new(BuscarWidgets, 1);
     buscar_widgets->entry = entry_buscar;
     buscar_widgets->text_view = text_view_buscar;
-    g_signal_connect(button_buscar, "clicked", G_CALLBACK(on_buscar_clicked), buscar_widgets);
+    g_signal_connect(button_buscar, "clicked", G_CALLBACK(clientSelect_buscar_AgenciaAutos, buscar_widgets);
 
    // Conectar señal de click del botón de eliminar
     GtkWidget *entry;
@@ -259,7 +259,7 @@ int main(int argc, char **argv) {
 }
 
 // Función de callback para el botón "Seleccionar todos"
-void on_select_todos_clicked(GtkButton *button, GtkWidget *text_view) {
+void  clientSelect_todos_AgenciaAutos(GtkButton *button, GtkWidget *text_view) {
     // Lógica para llamar al servicio "SELECT_TODOS_AgenciaAutos"
     int ivL_resLlamd;
     long lvL_tamLongt;
@@ -359,7 +359,7 @@ void on_select_todos_clicked(GtkButton *button, GtkWidget *text_view) {
 }
 
 // Función de callback para el botón "Buscar"
-void on_buscar_clicked(GtkButton *button, BuscarWidgets *widgets) {
+void clientSelect_buscar_AgenciaAutos(GtkButton *button, BuscarWidgets *widgets) {
     // Obtener el texto ingresado en el cuadro de entrada
     const char *entry_text = gtk_entry_get_text(GTK_ENTRY(widgets->entry));
     int id_auto = atoi(entry_text);
